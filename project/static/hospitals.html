@@ -1,0 +1,605 @@
+<!DOCTYPE html>
+<html>
+<head>
+    
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    
+        <script>
+            L_NO_TOUCH = false;
+            L_DISABLE_3D = false;
+        </script>
+    
+    <style>html, body {width: 100%;height: 100%;margin: 0;padding: 0;}</style>
+    <style>#map {position:absolute;top:0;bottom:0;right:0;left:0;}</style>
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.3/dist/leaflet.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.2/dist/css/bootstrap.min.css"/>
+    <link rel="stylesheet" href="https://netdna.bootstrapcdn.com/bootstrap/3.0.0/css/bootstrap-glyphicons.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.2.0/css/all.min.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/Leaflet.awesome-markers/2.0.2/leaflet.awesome-markers.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/python-visualization/folium/folium/templates/leaflet.awesome.rotate.min.css"/>
+    
+            <meta name="viewport" content="width=device-width,
+                initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
+            <style>
+                #map_d0d0e1b2d90b8cfd79ac75f5b5322f75 {
+                    position: relative;
+                    width: 100.0%;
+                    height: 100.0%;
+                    left: 0.0%;
+                    top: 0.0%;
+                }
+                .leaflet-container { font-size: 1rem; }
+            </style>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/leaflet.markercluster.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.css"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet.markercluster/1.1.0/MarkerCluster.Default.css"/>
+</head>
+<body>
+    
+    
+    <div style="position: fixed; 
+                bottom: 10px; left: 10px; width: 240px; height: auto; 
+                background-color: rgba(255, 255, 255, 0.8); z-index:9999; border:2px solid grey; 
+                font-size:14px; padding: 10px; border-radius: 5px;">
+    <i class="fa fa-map-marker" style="color:blue"></i>&nbsp;You are here<br>
+    <i class="fa fa-map-marker" style="color:red"></i>&nbsp;Nearby Hospitals<br>
+    <p>Click on the markers for details!</p>
+    </div>
+    
+    
+            <div class="folium-map" id="map_d0d0e1b2d90b8cfd79ac75f5b5322f75" ></div>
+        
+</body>
+<script>
+    
+    
+            var map_d0d0e1b2d90b8cfd79ac75f5b5322f75 = L.map(
+                "map_d0d0e1b2d90b8cfd79ac75f5b5322f75",
+                {
+                    center: [23.547, 87.2902],
+                    crs: L.CRS.EPSG3857,
+                    ...{
+  "zoom": 13,
+  "zoomControl": true,
+  "preferCanvas": false,
+}
+
+                }
+            );
+
+            
+
+        
+    
+            var tile_layer_2bf804e2c885e2779df321758a57d76a = L.tileLayer(
+                "https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png",
+                {
+  "minZoom": 0,
+  "maxZoom": 20,
+  "maxNativeZoom": 20,
+  "noWrap": false,
+  "attribution": "\u0026copy; \u003ca href=\"http://stamen.com\"\u003eStamen Design\u003c/a\u003e | Data by \u003ca href=\"http://openstreetmap.org\"\u003eOpenStreetMap\u003c/a\u003e contributors",
+  "subdomains": "abcd",
+  "detectRetina": false,
+  "tms": false,
+  "opacity": 1,
+}
+
+            );
+        
+    
+            tile_layer_2bf804e2c885e2779df321758a57d76a.addTo(map_d0d0e1b2d90b8cfd79ac75f5b5322f75);
+        
+    
+            var marker_78b6bcf4b89bc956e408656db9cd97ae = L.marker(
+                [23.547, 87.2902],
+                {
+}
+            ).addTo(map_d0d0e1b2d90b8cfd79ac75f5b5322f75);
+        
+    
+            var icon_9256749013b31297dda84dc0da0a5bfc = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "blue",
+  "iconColor": "white",
+  "icon": "info-sign",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_78b6bcf4b89bc956e408656db9cd97ae.setIcon(icon_9256749013b31297dda84dc0da0a5bfc);
+        
+    
+            marker_78b6bcf4b89bc956e408656db9cd97ae.bindTooltip(
+                `<div>
+                     You are here
+                 </div>`,
+                {
+  "sticky": true,
+}
+            );
+        
+    
+            var marker_cluster_91789594efb6b5abf3b88552927999af = L.markerClusterGroup(
+                {
+}
+            );
+        
+    
+            var marker_db87c520e863d38a824c6f74737fcfbf = L.marker(
+                [23.5154119, 87.2656454],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_796642c3a394650e12715bad2050d900 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_db87c520e863d38a824c6f74737fcfbf.setIcon(icon_796642c3a394650e12715bad2050d900);
+        
+    
+        var popup_d985ce45e4dadf105284f475dbfcd56c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_4c16b1d72a406849eba4d18791d511ac = $(`<div id="html_4c16b1d72a406849eba4d18791d511ac" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Matri Sadan</strong><br>             <em>Address: Address not available</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">4.30 km</strong><br>             Direction: SW<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5154119,87.2656454' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_d985ce45e4dadf105284f475dbfcd56c.setContent(html_4c16b1d72a406849eba4d18791d511ac);
+            
+        
+
+        marker_db87c520e863d38a824c6f74737fcfbf.bindPopup(popup_d985ce45e4dadf105284f475dbfcd56c)
+        ;
+
+        
+    
+    
+            var marker_dd7f886b33a4ccf1624d00a1c8ac6bc3 = L.marker(
+                [23.5230593, 87.3394818],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_62996ca180638fe82d191462f2664781 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_dd7f886b33a4ccf1624d00a1c8ac6bc3.setIcon(icon_62996ca180638fe82d191462f2664781);
+        
+    
+        var popup_8459dff5dd9100371f9e910d9d536f05 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_be309b94b69f7eb0680bc96da61cb373 = $(`<div id="html_be309b94b69f7eb0680bc96da61cb373" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Vivekananda Hospital</strong><br>             <em>Address: Dr.Zakir Hussain Avenue ,Bidhannagar, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">5.69 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5230593,87.3394818' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_8459dff5dd9100371f9e910d9d536f05.setContent(html_be309b94b69f7eb0680bc96da61cb373);
+            
+        
+
+        marker_dd7f886b33a4ccf1624d00a1c8ac6bc3.bindPopup(popup_8459dff5dd9100371f9e910d9d536f05)
+        ;
+
+        
+    
+    
+            var marker_cedaecf74504f011cb1d9938a397dd76 = L.marker(
+                [23.5259167, 87.2552453],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_e5fc7af8a673849918bd77eba738254a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_cedaecf74504f011cb1d9938a397dd76.setIcon(icon_e5fc7af8a673849918bd77eba738254a);
+        
+    
+        var popup_cc23fc1619d3b254b4631feeda938489 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_5d34bd14265a626429635daf0af1593c = $(`<div id="html_5d34bd14265a626429635daf0af1593c" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">DTPS Hospital</strong><br>             <em>Address: Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">4.27 km</strong><br>             Direction: SW<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5259167,87.2552453' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_cc23fc1619d3b254b4631feeda938489.setContent(html_5d34bd14265a626429635daf0af1593c);
+            
+        
+
+        marker_cedaecf74504f011cb1d9938a397dd76.bindPopup(popup_cc23fc1619d3b254b4631feeda938489)
+        ;
+
+        
+    
+    
+            var marker_bc5aee2494ca86a6598c4787ea5fff80 = L.marker(
+                [23.53966, 87.3002172],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_613c419d15dcf13a51705a5496def5e1 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_bc5aee2494ca86a6598c4787ea5fff80.setIcon(icon_613c419d15dcf13a51705a5496def5e1);
+        
+    
+        var popup_49d79138892318e2d8106155d088f4eb = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_debe077e60718b4d761b14e9d57874f9 = $(`<div id="html_debe077e60718b4d761b14e9d57874f9" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Durgapur City clinic and Nursing Home Pvt Ltd</strong><br>             <em>Address: Doctors Colony, Central Park, City Centre, Durgapur</em><br>             Phone: <strong>245-5262 / 254-6600</strong><br>             Distance: <strong style="color: green;">1.31 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.53966,87.3002172' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_49d79138892318e2d8106155d088f4eb.setContent(html_debe077e60718b4d761b14e9d57874f9);
+            
+        
+
+        marker_bc5aee2494ca86a6598c4787ea5fff80.bindPopup(popup_49d79138892318e2d8106155d088f4eb)
+        ;
+
+        
+    
+    
+            var marker_17162b6a6da5c7a5a1c0f40f5a78ab00 = L.marker(
+                [23.5232869, 87.3440733],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_76d1f39559690b014288958117019594 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_17162b6a6da5c7a5a1c0f40f5a78ab00.setIcon(icon_76d1f39559690b014288958117019594);
+        
+    
+        var popup_c7f07a8dbe9ce55939c409b2e31906f5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_7e2e0d97aa5bbb358a24ae6173849f50 = $(`<div id="html_7e2e0d97aa5bbb358a24ae6173849f50" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Dr.B.C.Roy Medical Institute</strong><br>             <em>Address: N-1, Doctor S Colony, City Centre, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">6.10 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5232869,87.3440733' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_c7f07a8dbe9ce55939c409b2e31906f5.setContent(html_7e2e0d97aa5bbb358a24ae6173849f50);
+            
+        
+
+        marker_17162b6a6da5c7a5a1c0f40f5a78ab00.bindPopup(popup_c7f07a8dbe9ce55939c409b2e31906f5)
+        ;
+
+        
+    
+    
+            var marker_4067e2aa1638ff6bcfe9bb4194a45dbd = L.marker(
+                [23.5200264, 87.3553296],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_41a9f83f7978f919ae54e443af5be892 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_4067e2aa1638ff6bcfe9bb4194a45dbd.setIcon(icon_41a9f83f7978f919ae54e443af5be892);
+        
+    
+        var popup_f5d783e2c43cf491b1fe7b90659bd46c = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_cfd0449694b6bffb68674bc63e80c224 = $(`<div id="html_cfd0449694b6bffb68674bc63e80c224" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">The Mission Hospital</strong><br>             <em>Address: Plot No 219 (P), Immon Kalyan,Saptarshi Sarani,Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">7.29 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5200264,87.3553296' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_f5d783e2c43cf491b1fe7b90659bd46c.setContent(html_cfd0449694b6bffb68674bc63e80c224);
+            
+        
+
+        marker_4067e2aa1638ff6bcfe9bb4194a45dbd.bindPopup(popup_f5d783e2c43cf491b1fe7b90659bd46c)
+        ;
+
+        
+    
+    
+            var marker_54c6fe84155594e6c062ffb7d052066c = L.marker(
+                [23.5128238, 87.3508195],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_27346f41b3f6e5e8ca3f259662561b78 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_54c6fe84155594e6c062ffb7d052066c.setIcon(icon_27346f41b3f6e5e8ca3f259662561b78);
+        
+    
+        var popup_f9e941f926b00385276e7a9178642ae1 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_dd5554602b6c5cf9adeff8bf7959a6fd = $(`<div id="html_dd5554602b6c5cf9adeff8bf7959a6fd" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Bidhan Niramoy Nursing Home</strong><br>             <em>Address: B-120,Aldrin Path, Bidhannagar Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">7.26 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5128238,87.3508195' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_f9e941f926b00385276e7a9178642ae1.setContent(html_dd5554602b6c5cf9adeff8bf7959a6fd);
+            
+        
+
+        marker_54c6fe84155594e6c062ffb7d052066c.bindPopup(popup_f9e941f926b00385276e7a9178642ae1)
+        ;
+
+        
+    
+    
+            var marker_7ae07dd356d9cb3eeb11b0fa3224ace2 = L.marker(
+                [23.5333414, 87.2936229],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_af5f2d4b603b404f98869381da8c14bd = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_7ae07dd356d9cb3eeb11b0fa3224ace2.setIcon(icon_af5f2d4b603b404f98869381da8c14bd);
+        
+    
+        var popup_b47529903b2d364870a2b046a9f15b7a = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_a906c3444b6b318d2cccf96610eae860 = $(`<div id="html_a906c3444b6b318d2cccf96610eae860" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Disha Eye Hospitals And Research Centre Pvt Ltd</strong><br>             <em>Address: Road No-100, Palasdiha, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">1.55 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.5333414,87.2936229' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_b47529903b2d364870a2b046a9f15b7a.setContent(html_a906c3444b6b318d2cccf96610eae860);
+            
+        
+
+        marker_7ae07dd356d9cb3eeb11b0fa3224ace2.bindPopup(popup_b47529903b2d364870a2b046a9f15b7a)
+        ;
+
+        
+    
+    
+            var marker_9c979431a1b2f34b3769ced4422b4a6d = L.marker(
+                [23.494259, 87.295235],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_8b75d3b1e20ebefe371bcb58887fb597 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_9c979431a1b2f34b3769ced4422b4a6d.setIcon(icon_8b75d3b1e20ebefe371bcb58887fb597);
+        
+    
+        var popup_50caa5233fe456fe1bee2cbaee0d8e14 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_31eb36765e5aa9cec0afffd605962570 = $(`<div id="html_31eb36765e5aa9cec0afffd605962570" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">DPL Hospital</strong><br>             <em>Address: DPL Coke Oven Colony, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">5.86 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.494259,87.295235' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_50caa5233fe456fe1bee2cbaee0d8e14.setContent(html_31eb36765e5aa9cec0afffd605962570);
+            
+        
+
+        marker_9c979431a1b2f34b3769ced4422b4a6d.bindPopup(popup_50caa5233fe456fe1bee2cbaee0d8e14)
+        ;
+
+        
+    
+    
+            var marker_487a211b96c7a76d34073ca67b85f465 = L.marker(
+                [23.523857, 87.340576],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_d83669f42551e64c9336ea2fedc0ff8e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_487a211b96c7a76d34073ca67b85f465.setIcon(icon_d83669f42551e64c9336ea2fedc0ff8e);
+        
+    
+        var popup_447064d257110660abd1059f677892f6 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_29930da2f0265efe91bb671104a1d630 = $(`<div id="html_29930da2f0265efe91bb671104a1d630" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">ESI Hospital</strong><br>             <em>Address: Bidhannagar, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">5.75 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.523857,87.340576' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_447064d257110660abd1059f677892f6.setContent(html_29930da2f0265efe91bb671104a1d630);
+            
+        
+
+        marker_487a211b96c7a76d34073ca67b85f465.bindPopup(popup_447064d257110660abd1059f677892f6)
+        ;
+
+        
+    
+    
+            var marker_5daf4c5a439be4520d840ba01a07d413 = L.marker(
+                [23.572585, 87.304977],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_7debf1f4c9433ac16ef230d0d9f46b48 = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_5daf4c5a439be4520d840ba01a07d413.setIcon(icon_7debf1f4c9433ac16ef230d0d9f46b48);
+        
+    
+        var popup_8906958c21d15e48d15396fbcfc26cd5 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_944591c41ee6fa6ba0064b7338e1882d = $(`<div id="html_944591c41ee6fa6ba0064b7338e1882d" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Main Hospital</strong><br>             <em>Address: B-Zone, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">3.21 km</strong><br>             Direction: NE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.572585,87.304977' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_8906958c21d15e48d15396fbcfc26cd5.setContent(html_944591c41ee6fa6ba0064b7338e1882d);
+            
+        
+
+        marker_5daf4c5a439be4520d840ba01a07d413.bindPopup(popup_8906958c21d15e48d15396fbcfc26cd5)
+        ;
+
+        
+    
+    
+            var marker_42a790e18b128ceb6e1d00bfcba96429 = L.marker(
+                [23.539446, 87.30049],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_faf6da5956bf153c06e1de5badec4b2e = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_42a790e18b128ceb6e1d00bfcba96429.setIcon(icon_faf6da5956bf153c06e1de5badec4b2e);
+        
+    
+        var popup_f9a61cc89179ef46870e771e662f128d = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_f3fb14d4ce593b880007012ab29cf57f = $(`<div id="html_f3fb14d4ce593b880007012ab29cf57f" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Durgapur City Hospital</strong><br>             <em>Address: Central Park, Doctor's Colony, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">1.34 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.539446,87.30049' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_f9a61cc89179ef46870e771e662f128d.setContent(html_f3fb14d4ce593b880007012ab29cf57f);
+            
+        
+
+        marker_42a790e18b128ceb6e1d00bfcba96429.bindPopup(popup_f9a61cc89179ef46870e771e662f128d)
+        ;
+
+        
+    
+    
+            var marker_d84593bb985ea0f2555ded0c992bca92 = L.marker(
+                [23.526108, 87.342168],
+                {
+}
+            ).addTo(marker_cluster_91789594efb6b5abf3b88552927999af);
+        
+    
+            var icon_6e98f4fe496335d21780cdccc8c2809a = L.AwesomeMarkers.icon(
+                {
+  "markerColor": "red",
+  "iconColor": "white",
+  "icon": "hospital-o",
+  "prefix": "glyphicon",
+  "extraClasses": "fa-rotate-0",
+}
+            );
+            marker_d84593bb985ea0f2555ded0c992bca92.setIcon(icon_6e98f4fe496335d21780cdccc8c2809a);
+        
+    
+        var popup_a2bed2965211ee98bc907a90984a2492 = L.popup({
+  "maxWidth": 300,
+});
+
+        
+            
+                var html_2ac8d4b2aa9ce19f78efc6819b228a3e = $(`<div id="html_2ac8d4b2aa9ce19f78efc6819b228a3e" style="width: 100.0%; height: 100.0%;">         <div style="font-size: 16px; line-height: 1.5; color: #333; background-color: #fff; border-radius: 8px; padding: 10px; border: 1px solid #ddd;">             <strong style="font-size: 18px;">Durgapur Sub Divisional Hospital</strong><br>             <em>Address: Bidhannagar, Durgapur</em><br>             Phone: <strong>No phone number available</strong><br>             Distance: <strong style="color: green;">5.79 km</strong><br>             Direction: SE<br>             <a href='https://www.google.com/maps/dir/?api=1&origin=23.547,87.2902&destination=23.526108,87.342168' target='_blank' style="color: blue; text-decoration: underline;">Get Directions</a>         </div>         </div>`)[0];
+                popup_a2bed2965211ee98bc907a90984a2492.setContent(html_2ac8d4b2aa9ce19f78efc6819b228a3e);
+            
+        
+
+        marker_d84593bb985ea0f2555ded0c992bca92.bindPopup(popup_a2bed2965211ee98bc907a90984a2492)
+        ;
+
+        
+    
+    
+            marker_cluster_91789594efb6b5abf3b88552927999af.addTo(map_d0d0e1b2d90b8cfd79ac75f5b5322f75);
+        
+</script>
+</html>
